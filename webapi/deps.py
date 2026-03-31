@@ -48,7 +48,10 @@ def get_config() -> dict[str, Any]:
 
 
 def get_runtime_model() -> str:
-    return _resolve_model()
+    model = _resolve_model()
+    if isinstance(model, dict):
+        return model.get("default", model.get("model", "gpt-4.1-mini"))
+    return model
 
 
 def get_runtime_agent_kwargs() -> dict[str, Any]:
